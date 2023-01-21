@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\FileSource;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFileSourceRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateFileSourceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->id == FileSource::findOrFail($this->route('fileSource'))->user_id;;
     }
 
     /**

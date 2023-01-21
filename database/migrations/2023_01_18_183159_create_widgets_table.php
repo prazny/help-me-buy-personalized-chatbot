@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('widgets', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name');
             $table->json('styles')->nullable();
             $table->string('domain');

@@ -13,7 +13,7 @@ class UpdateWidgetRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->id == Widget::findOrFail($this->route('widget'))->user_id;;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\enums\FileSourceTypeEnum;
+use App\Http\Requests\DestroyFileSourceRequest;
 use App\Http\Requests\StoreFileSourceRequest;
 use App\Http\Requests\UpdateFileSourceRequest;
 use App\Http\Resources\FileSourceResource;
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\DB;
 class FileSourceController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return FileSource::all();
+        return $request->user()->fileSources;
     }
 
     public function show(FileSource $fileSource): FileSourceResource
@@ -28,7 +29,7 @@ class FileSourceController extends Controller
     {
         DB::beginTransaction();
         try {
-            $fileSource = FileSource::create($request->all());
+            $fileSource = $request->user()->fileSources()->create($request->all());
             if ($fileSource->type == FileSourceTypeEnum::URL) {
                 $fileSource
                     ->addMediaFromUrl($fileSource->path)
@@ -54,7 +55,7 @@ class FileSourceController extends Controller
         return new FileSourceResource($fileSource);
     }
 
-    public function destroy(FileSource $fileSource)
+    public function destroy(FileSource $fileSource, DestroyFileSourceRequest $request)
     {
         $fileSource->delete();
         return response(null, 204);

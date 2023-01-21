@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyWidgetRequest;
+use App\Http\Requests\GetChatPossibilitiesWidgetRequest;
+use App\Http\Requests\ShowWidgetRequest;
 use App\Http\Requests\StoreWidgetRequest;
 use App\Http\Requests\UpdateWidgetChatPossibilitiesRequest;
 use App\Http\Resources\WidgetResource;
@@ -12,18 +15,18 @@ use App\Models\Widget;
 use DB;
 use Illuminate\Http\Request;
 
-class WidgetController
+class WidgetController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Widget::all();
+        return $request->user()->widgets;
     }
 
     public function store(StoreWidgetRequest $request): WidgetResource
     {
         DB::beginTransaction();
         try {
-            $widget = Widget::create($request->all());
+            $widget = $request->user()->widgets()->create($request->all());
 
             foreach ($request['file_sources'] as $file_source) {
                 $fileSource = FileSource::findOrFail($file_source);
@@ -38,18 +41,18 @@ class WidgetController
         }
     }
 
-    public function show(Widget $widget)
+    public function show(Widget $widget, ShowWidgetRequest $request)
     {
         return new WidgetResource($widget);
     }
 
-    public function destroy(Widget $widget)
+    public function destroy(Widget $widget, DestroyWidgetRequest $request)
     {
         $widget->delete();
         return response(null, 204);
     }
 
-    public function getWidgetChatPossibilities(Widget $widget)
+    public function getWidgetChatPossibilities(Widget $widget, GetChatPossibilitiesWidgetRequest $request)
     {
         $sources = $widget->fileSources;
         $products = [];

@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function fileSources(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(FileSource::class);
+    }
+
+    public function widgets(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Widget::class);
+    }
+
+    public function oauthSources(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(OathSource::class);
+    }
 }

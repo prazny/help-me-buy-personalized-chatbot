@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('file_sources', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('type');
             $table->string('name');
             $table->string('path')->nullable();

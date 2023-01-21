@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\Widget;
-use App\Rules\StoriesSchemaRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateWidgetChatPossibilitiesRequest extends FormRequest
+class GetChatPossibilitiesWidgetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +14,7 @@ class UpdateWidgetChatPossibilitiesRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id == Widget::findOrFail($this->route('widget'))->user_id;;
+        return $this->user()->id == Widget::findOrFail($this->route('widget'))->user_id;
     }
 
     /**
@@ -26,8 +25,7 @@ class UpdateWidgetChatPossibilitiesRequest extends FormRequest
     public function rules()
     {
         return [
-            'stories' => ['array', 'required', new StoriesSchemaRule],
-            'stories.*' => 'array|required'
+            //
         ];
     }
 }

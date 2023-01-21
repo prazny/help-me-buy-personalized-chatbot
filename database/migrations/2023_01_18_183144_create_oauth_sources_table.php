@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('oauth_sources', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name');
             $table->string('client_id', 400);
             $table->string('client_secret', 400);

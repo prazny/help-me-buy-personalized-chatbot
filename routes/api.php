@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/users/register', [\App\Http\Controllers\UserController::class, 'register']);
+Route::post('/users/login', [\App\Http\Controllers\UserController::class, 'login']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'getUser']);
+
+    Route::resource('widgets', \App\Http\Controllers\WidgetController::class);
+    Route::resource('file-sources', \App\Http\Controllers\FileSourceController::class);
+    Route::get('/widgets/{widget}/chat-possibilities', [\App\Http\Controllers\WidgetController::class, 'getWidgetChatPossibilities']);
+    Route::post('/widgets/{widget}/chat-possibilities', [\App\Http\Controllers\WidgetController::class, 'updateWidgetChatPossibilities']);
 });
 
-
-Route::resource('widgets', \App\Http\Controllers\WidgetController::class);
-Route::resource('file-sources', \App\Http\Controllers\FileSourceController::class);
-Route::get('/widgets/{widget}/chat-possibilities', [\App\Http\Controllers\WidgetController::class, 'getWidgetChatPossibilities']);
-Route::post('/widgets/{widget}/chat-possibilities', [\App\Http\Controllers\WidgetController::class, 'updateWidgetChatPossibilities']);
 
 Route::post('/chatbot/messaging', [\App\Http\Controllers\ChatbotController::class, 'messaging'])
     ->middleware('throttle:600,1');
