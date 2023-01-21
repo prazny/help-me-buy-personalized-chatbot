@@ -15,7 +15,7 @@ class UpdateWidgetChatPossibilitiesRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id == Widget::findOrFail($this->route('widget'))->user_id;;
+        return $this->user()->id == $this->route('widget')->user_id;;
     }
 
     /**

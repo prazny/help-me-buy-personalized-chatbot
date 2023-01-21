@@ -14,7 +14,7 @@ class DestroyFileSourceRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id == FileSource::findOrFail($this->route('fileSource'))->user_id;;
+        return $this->user()->id == $this->route('fileSource')->user_id;;
     }
 
     /**

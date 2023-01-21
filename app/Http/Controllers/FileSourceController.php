@@ -20,9 +20,9 @@ class FileSourceController extends Controller
         return $request->user()->fileSources;
     }
 
-    public function show(FileSource $fileSource): FileSourceResource
+    public function show(FileSource $fileSource)
     {
-        return new FileSourceResource($fileSource);
+        return $fileSource;
     }
 
     public function store(StoreFileSourceRequest $request): FileSourceResource

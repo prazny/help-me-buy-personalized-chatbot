@@ -43,7 +43,7 @@ class WidgetController extends Controller
 
     public function show(Widget $widget, ShowWidgetRequest $request)
     {
-        return new WidgetResource($widget);
+        return $widget;
     }
 
     public function destroy(Widget $widget, DestroyWidgetRequest $request)
@@ -78,12 +78,12 @@ class WidgetController extends Controller
         $categories = ProductCategory::whereIn('id', $categories_id)->get();
 
         return response()->json([
-                'stories' => $widget->stories,
-                'possibilities' => [
-                    'categories' => $categories,
-                    'params' => $params
-                ]
-            ]);
+            'stories' => $widget->stories,
+            'possibilities' => [
+                'categories' => $categories,
+                'params' => $params
+            ]
+        ]);
     }
 
     public function updateWidgetChatPossibilities(Widget $widget, UpdateWidgetChatPossibilitiesRequest $request)
