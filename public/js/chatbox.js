@@ -1,5 +1,3 @@
-const apiUrl = "http://help-me-buy-backend.test:8080/api/chatbot/"
-const apiMessagingUrl = "http://help-me-buy-backend.test:8080/api/chatbot/messaging"
 let token = ""
 let messagesContainer;
 let stepNumber = 0
@@ -11,7 +9,7 @@ jQuery(window).on('load', function () {
 
 function startMessaging() {
     let widget_id = $("#chatbot-body").data('widget-id')
-    axios.get(apiUrl + widget_id + "/start-messaging").then(resp => {
+    axios.get(apiStartMessagingUrl).then(resp => {
         token = resp.data.token
         jQuery("#chatbot-title").html(resp.data.widget.name)
         sendMessage([], 1)

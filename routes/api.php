@@ -28,10 +28,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 Route::post('/chatbot/messaging', [\App\Http\Controllers\ChatbotController::class, 'messaging'])
-    ->middleware('throttle:600,1');
+    ->middleware('throttle:600,1')->name('chatbot-messaging');
 
 Route::get('/chatbot/{widget}/start-messaging', [\App\Http\Controllers\ChatbotController::class, 'startMessaging'])
-    ->middleware('throttle:100,1');
+    ->middleware('throttle:100,1')->name('chatbot-start-messaging');
 
 
 

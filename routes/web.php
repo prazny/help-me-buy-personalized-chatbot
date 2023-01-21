@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/chatbot/{widget}', [\App\Http\Controllers\ChatbotController::class, 'getChatbot']);
+Route::get('/chatbot/{widget}', [\App\Http\Controllers\ChatbotController::class, 'getChatbot'])->name('get-chat');
 
 Route::get('/chatbot-test', function() {
     return view('test-chat');

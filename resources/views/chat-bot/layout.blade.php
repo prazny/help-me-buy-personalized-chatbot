@@ -1,6 +1,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ asset('css/chatbot.css?id='  . rand(1, 5000)) }}"/>
+    <script>
+        const apiStartMessagingUrl = "{{ route('chatbot-start-messaging', $widget_id) }}"
+        const apiMessagingUrl = "{{ route('chatbot-messaging') }}"
+    </script>
 </head>
 <body>
 <div class="chatbot-container" id="chatbot-body" data-widget-id="{{ $widget_id }}" x-data="{open: true}">
