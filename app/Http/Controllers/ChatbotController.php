@@ -13,10 +13,10 @@ use OAuthProvider;
 
 class ChatbotController extends Controller
 {
-    public function getChatbot()
+    public function getChatbot(Widget $widget)
     {
         return view('chat-bot.layout', [
-            'widget_id' => 2
+            'widget_id' => $widget->id
         ]);
     }
 
