@@ -9,15 +9,18 @@ use App\Services\Chat\Chat;
 use App\Services\Chat\Messaging\Dto\ChatDto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use OAuthProvider;
 
 class ChatbotController extends Controller
 {
     public function getChatbot(Widget $widget)
     {
-        return view('chat-bot.layout', [
+        $chatBot = \View::make('chat-bot.layout', [
             'widget_id' => $widget->id
         ]);
+        $response = response()->make($chatBot, 200);
+        $front_url = config('front.front_url');
+        $response->header('Content-Security-Policy', "frame-ancestors {$front_url} {$widget->domain}");
+        return $response;
     }
 
     /**
