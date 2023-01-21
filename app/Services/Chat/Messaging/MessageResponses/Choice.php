@@ -55,7 +55,7 @@ class Choice extends MessageResponse implements MessageResponseInterface
         foreach($categories as $category) {
             $response_values[$category->id] = $category->name;
         }
-        return new Response(1, $this->question, $response_values, 'single');
+        return new Response(1, 'text', $this->question, $response_values, 'single');
     }
 
     private function getResponseForPrice(): Response
@@ -77,6 +77,6 @@ class Choice extends MessageResponse implements MessageResponseInterface
             $response_values["{$price['from']}-{$price['to']}"] = "{$price['from']} - {$price['to']}";
         }
 
-        return new Response(1, $this->question, $response_values, 'single');
+        return new Response(1,'text', $this->question, $response_values, 'single');
     }
 }
