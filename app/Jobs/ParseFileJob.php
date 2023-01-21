@@ -46,11 +46,14 @@ class ParseFileJob implements ShouldQueue
         try {
             if ($file->mime_type == 'text/csv') {
                 $products = $fileParser->parseCsv($this->fileSource->getMedia('file')->first()->getPath());
-
-                foreach ($products as $product) {
-                    (new StoreProductFromParsedProduct())->execute($this->fileSource, $product);
-                }
+            } else if($file->mime_type == 'text/xml') {
+                $products = $fileParser->parseXml($this->fileSource->getMedia('file')->first()->getPath());
             }
+
+            foreach ($products as $product) {
+                (new StoreProductFromParsedProduct())->execute($this->fileSource, $product);
+            }
+
             $this->fileSource->is_parsed = 1;
             $this->fileSource->is_correct = 1;
             $this->fileSource->save();
@@ -58,6 +61,7 @@ class ParseFileJob implements ShouldQueue
             $this->fileSource->is_parsed = 1;
             $this->fileSource->is_correct = 0;
             $this->fileSource->save();
+            \Log::warning($e);
             throw $e;
         }
 

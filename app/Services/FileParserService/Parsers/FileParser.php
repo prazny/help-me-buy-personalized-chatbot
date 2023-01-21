@@ -3,6 +3,7 @@
 namespace App\Services\FileParserService\Parsers;
 
 use App\Services\FileParserService\Dto\ParsedProduct;
+use SimpleXMLElement;
 
 class FileParser
 {
@@ -36,6 +37,29 @@ class FileParser
 
             $parsedProducts[] = new ParsedProduct($cols[0], $cols[1], $cols[2], $imgs, $cols[4], floatval($cols[5]), $params);
         }
+        return $parsedProducts;
+    }
+
+    public function parseXml(string $path): array
+    {
+        $xml_content = file_get_contents($path);
+        $xml = new SimpleXMLElement($xml_content);
+        $parsedProducts = [];
+        foreach ($xml->product as $product) {
+            $imgs = explode(",", (string)$product->image_url);
+
+            $params = [];
+            foreach($product->params as $param) {
+                $params[] = [(string)$param->name, (string)$param->value];
+            }
+
+            $parsedProducts[] = new ParsedProduct($product->id[0], (string)$product->url,
+                (string)$product->title[0],
+                $imgs, (string)$product->category,
+                floatval($product->price),
+                $params);
+        }
+
         return $parsedProducts;
     }
 
