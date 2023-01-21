@@ -10,6 +10,8 @@ class Widget extends Model
     use HasFactory;
     protected $fillable = ['name', 'styles', 'domain', 'stories'];
 
+    protected $appends = ['iframe_code'];
+
     protected $casts = [
         'stories' => 'array',
         'styles' => 'array',
@@ -18,4 +20,9 @@ class Widget extends Model
     public function fileSources() {
         return $this->morphedByMany(FileSource::class, 'source', 'widget_source');
     }
+
+    public function getIframeCodeAttribute() {
+        return view('chat-bot.chatbot-iframe', ['widget_id' => $this->id])->render();
+    }
+
 }
