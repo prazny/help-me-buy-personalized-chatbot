@@ -170,7 +170,6 @@
 
 .message-bubble-bot-products-product-image-badge {
     position: absolute;
-
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
     top: 0;
@@ -190,6 +189,7 @@
     max-width: calc(100% + 24px);
     margin-left: -12px;
     display: block;
+    aspect-ratio: 1/1;
 }
 
 .message-bubble-bot-products-product-title {

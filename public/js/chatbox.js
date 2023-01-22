@@ -45,7 +45,7 @@ function putMessage(response_type, message, value_type, values, variables) {
                 let product = `<a href="${item.url}" target="_blank" class="message-bubble message-bubble-bot-products-product">`
                 product += `<div class="message-bubble-bot-products-product-image-wrap">`
                 product += `<span class="message-bubble-bot-products-product-image-badge">${item.price} zł</span>`
-                product += `<img class="message-bubble-bot-products-product-image" src="${item.img_url}" />`
+                product += `<img class="message-bubble-bot-products-product-image" src="${item.img_url}" onerror="this.src='/img/no-img.png'" />`
                 product += `</div>`
                 product += `<div class="message-bubble-bot-products-product-title">`
                 product += `<div class="message-bubble-bot-products-product-name">${item.name}</div>`
