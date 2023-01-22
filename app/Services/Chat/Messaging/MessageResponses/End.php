@@ -17,6 +17,6 @@ class End extends MessageResponse implements MessageResponseInterface
 
     public function getResponse(): Response
     {
-        return new Response(1, 'text', "Goodbye!", [1 => 'Click to start chat.'], 'button');;
+        return new Response(1, 'text', $this->story['question'], [1 => $this->story['value']], 'single');
     }
 }

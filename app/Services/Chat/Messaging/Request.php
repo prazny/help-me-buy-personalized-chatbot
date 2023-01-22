@@ -4,6 +4,7 @@ namespace App\Services\Chat\Messaging;
 
 use App\Services\Chat\Messaging\Dto\ChatDto;
 use App\Services\Chat\Messaging\MessageRequests\Choice;
+use App\Services\Chat\Messaging\MessageRequests\End;
 use App\Services\Chat\Messaging\MessageRequests\Message;
 use App\Services\Chat\Messaging\MessageRequests\Search;
 use App\Services\Chat\Messaging\MessageRequests\ShowProducts;
@@ -34,6 +35,7 @@ class Request
             'search' => (new Search($this->chatDto, $currentStory, $this->answer))->process(),
             'variable' => (new Variable($this->chatDto, $currentStory, $this->answer))->process(),
             'show-products' => (new ShowProducts($this->chatDto, $currentStory, $this->answer))->process(),
+            'end' => (new End($this->chatDto, $currentStory, $this->answer))->process(),
             default => throw new Exception(),
         };
     }

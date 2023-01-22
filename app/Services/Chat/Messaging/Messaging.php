@@ -38,10 +38,10 @@ class Messaging
 
         $is_last_story = $this->chatDto->isLastStory();
 
-        if ($is_last_story) {
+       /* if ($is_last_story) {
             $story = $this->chatDto->getCurrentStory();
             return new End($this->chatDto, $story);
-        }
+        }*/
 
         $story = $this->chatDto->getNextStory();
 
@@ -51,6 +51,7 @@ class Messaging
             'search' => new Search($this->chatDto, $story),
             'variable' => new Variable($this->chatDto, $story),
             'show-products' => new ShowProducts($this->chatDto, $story),
+            'end' => new End($this->chatDto, $story),
             default => throw new Exception(),
         };
     }

@@ -78,6 +78,17 @@ class ChatDto
         return $this->getStoriesCount() == $this->getNextStoryNo();
     }
 
+    public function reset(): bool
+    {
+        $this->chat['answers'] = [];
+        $this->chat['filters'] = [];
+        $this->chat['variables'] = [];
+        $this->chat['next_story_no'] = 0;
+
+        $this->saveChat();
+        return true;
+    }
+
     public static function create(int $widget_id, array $stories): ChatDto
     {
         $token = self::generateToken();
