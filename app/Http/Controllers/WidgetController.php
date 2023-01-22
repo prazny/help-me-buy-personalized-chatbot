@@ -7,6 +7,7 @@ use App\Http\Requests\GetChatPossibilitiesWidgetRequest;
 use App\Http\Requests\ShowWidgetRequest;
 use App\Http\Requests\StoreWidgetRequest;
 use App\Http\Requests\UpdateWidgetChatPossibilitiesRequest;
+use App\Http\Requests\UpdateWidgetRequest;
 use App\Http\Resources\WidgetResource;
 use App\Models\FileSource;
 use App\Models\Param;
@@ -44,6 +45,10 @@ class WidgetController extends Controller
     public function show(Widget $widget, ShowWidgetRequest $request)
     {
         return $widget;
+    }
+
+    public function update(Widget $widget, UpdateWidgetRequest $request) {
+        return $widget->update($request->all());
     }
 
     public function destroy(Widget $widget, DestroyWidgetRequest $request)

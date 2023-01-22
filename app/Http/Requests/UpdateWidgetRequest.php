@@ -24,7 +24,9 @@ class UpdateWidgetRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'string|required|min:3|max:50',
+            'domain' => 'string|required|min:3|max:50',
+            'styles' => 'array|nullable'
         ];
     }
 }

@@ -6,7 +6,6 @@ jQuery(window).on('load', function () {
     setTimeout(startMessaging, 1000);
 });
 
-
 function startMessaging() {
     let widget_id = $("#chatbot-body").data('widget-id')
     axios.get(apiStartMessagingUrl).then(resp => {

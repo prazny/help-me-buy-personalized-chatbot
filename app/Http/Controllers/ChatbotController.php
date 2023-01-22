@@ -15,7 +15,8 @@ class ChatbotController extends Controller
     public function getChatbot(Widget $widget)
     {
         $chatBot = \View::make('chat-bot.layout', [
-            'widget_id' => $widget->id
+            'widget_id' => $widget->id,
+            'variables' => $widget->styles,
         ]);
         $response = response()->make($chatBot, 200);
         $front_url = config('front.front_url');
