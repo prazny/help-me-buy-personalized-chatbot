@@ -7,18 +7,27 @@ use Illuminate\Database\Eloquent\Builder;
 
 class FilterByPrice extends Filter implements FilterInterface
 {
-    private array $params_id = [];
+    private array $prices = [];
 
     public function __construct(array $attrs)
     {
         parent::__construct($attrs);
-        foreach ($attrs as $param_id) {
-            $this->params_id[] = $param_id;
+        foreach ($attrs as $attr) {
+            $this->prices[] = explode("-", $attr);
         }
     }
 
     public function filter(Builder $builder): Builder
     {
-        return $builder->where('price', '<' , $this->params_id[0])->where('price', '>', $this->params_id[1]);
+        foreach($this->prices as $price) {
+            \Log::warning(json_encode($price));
+            $builder->whereBetween('price',  [$price[0], $price[1]]);
+        }
+        return $builder;
+    }
+
+    public static function fromArray(array $array): FilterByPrice
+    {
+        return new FilterByPrice($array);
     }
 }

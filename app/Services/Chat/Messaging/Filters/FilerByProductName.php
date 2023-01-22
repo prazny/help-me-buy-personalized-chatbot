@@ -21,4 +21,9 @@ class FilerByProductName extends Filter implements FilterInterface
     {
         return $builder->where('name', 'like', "%{$this->names[0]}%");
     }
+
+    public static function fromArray(array $array): FilerByProductName
+    {
+        return new FilerByProductName($array);
+    }
 }

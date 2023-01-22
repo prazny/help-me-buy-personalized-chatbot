@@ -76,14 +76,14 @@ function putText(text, variables) {
 function putSingleChoiceInput(values) {
     let buttons = "";
     jQuery.each(values, function (key, value) {
-        buttons += `<button class="message-choice-button" onclick="sendMessage([${key}], ${stepNumber + 1})">${value}</button>`
+        buttons += `<button class="message-choice-button" onclick="sendMessage(['${key}'], ${stepNumber + 1})">${value}</button>`
     });
 
     messagesContainer.append('<div class="message-bubble message-bubble-human-transparent">' + buttons + '</div>')
 }
 
 function putTextInput(values) {
-    let inputs = `<input type="text" class="message-text-input" data-step-number="${stepNumber + 1}" />`;
+    let inputs = `<input type="text" placeholder="type your answer and hit enter" class="message-text-input" data-step-number="${stepNumber + 1}" />`;
     messagesContainer.append('<div class="message-bubble message-bubble-human-transparent">' + inputs + '</div>')
 }
 

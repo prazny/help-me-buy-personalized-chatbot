@@ -2,6 +2,8 @@
 
 namespace App\Services\Chat\Messaging\Filters;
 
+use App\Services\Chat\Interfaces\FilterInterface;
+
 abstract class Filter
 {
     protected array $attrs;
@@ -16,9 +18,4 @@ abstract class Filter
         return $this->attrs;
     }
 
-    public static function fromArray(array $array): FilterByParam
-    {
-        return new FilterByParam($array);
-
-    }
 }

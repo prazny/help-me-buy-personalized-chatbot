@@ -20,6 +20,13 @@ class FilterByParam extends Filter implements FilterInterface
 
     public function filter(Builder $builder): Builder
     {
-        return $builder;
+        return $builder->whereHas('paramValues', function($q) {
+            $q->whereIn('id', $this->params_id);
+        });
+    }
+
+    public static function fromArray(array $array): FilterByParam
+    {
+        return new FilterByParam($array);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Services\Chat\Messaging\Filters;
 
 use App\Services\Chat\Interfaces\FilterInterface;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class FilterByCategory extends Filter implements FilterInterface
 {
@@ -17,8 +17,18 @@ class FilterByCategory extends Filter implements FilterInterface
         }
     }
 
-    public function filter(Builder $builder): Builder
+    public function filter(Builder $builder): Builder|string
     {
         return $builder->whereIn('category_id', $this->categories_id);
+    }
+
+    public function toArray(): array
+    {
+        return $this->attrs;
+    }
+
+    public static function fromArray(array $array): FilterByCategory
+    {
+        return new FilterByCategory($array);
     }
 }
