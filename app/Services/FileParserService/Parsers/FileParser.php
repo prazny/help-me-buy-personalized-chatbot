@@ -3,6 +3,7 @@
 namespace App\Services\FileParserService\Parsers;
 
 use App\Services\FileParserService\Dto\ParsedProduct;
+use App\Services\FileParserService\Validators\XmlValidator;
 use SimpleXMLElement;
 
 class FileParser
@@ -40,10 +41,16 @@ class FileParser
         return $parsedProducts;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function parseXml(string $path): array
     {
         $xml_content = file_get_contents($path);
+        (new XmlValidator())->validate($xml_content); //validate, throw exception if not validated
+
         $xml = new SimpleXMLElement($xml_content);
+
         $parsedProducts = [];
         foreach ($xml->product as $product) {
             $imgs = explode(",", (string)$product->image_url);
@@ -59,7 +66,6 @@ class FileParser
                 floatval($product->price),
                 $params);
         }
-
         return $parsedProducts;
     }
 

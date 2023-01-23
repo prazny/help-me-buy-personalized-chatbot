@@ -17,6 +17,7 @@ class FileSource extends Source implements Parsable, HasMedia
     protected $casts = [
         'type' => FileSourceTypeEnum::class,
         'extension' => FileSourceExtensionEnum::class,
+        'errors' => 'array'
     ];
 
     public function products(): \Illuminate\Database\Eloquent\Relations\MorphMany

@@ -60,9 +60,9 @@ class ParseFileJob implements ShouldQueue
         } catch (\Exception $e) {
             $this->fileSource->is_parsed = 1;
             $this->fileSource->is_correct = 0;
+            $this->fileSource->errors =  $e->getMessage();
             $this->fileSource->save();
             \Log::warning($e);
-            throw $e;
         }
 
 
