@@ -212,6 +212,7 @@
     background-color: var(--chatbot-primary-color);
     color: white;
     margin-left: auto;
+    text-align: right;
     margin-right: 0;
 }
 

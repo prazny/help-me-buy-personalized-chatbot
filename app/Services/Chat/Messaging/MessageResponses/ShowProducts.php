@@ -18,6 +18,7 @@ class ShowProducts extends MessageResponse implements MessageResponseInterface
     public function getResponse(): Response
     {
         $products = Product::query();
+        //$products->file;
         foreach ($this->chatDto->getFilters() as $filter) {
             $class = $filter[0]::fromArray($filter[1]);
             $products = $class->filter($products);

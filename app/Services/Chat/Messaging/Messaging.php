@@ -32,11 +32,11 @@ class Messaging
     public function response(array $answer): MessageResponseInterface
     {
         $request = new Request($answer);
-        $is_request_processed = $request->process($this->chatDto);
+        $request->process($this->chatDto);
 
         // if($is_request_processed)
 
-        $is_last_story = $this->chatDto->isLastStory();
+        //$is_last_story = $this->chatDto->isLastStory();
 
        /* if ($is_last_story) {
             $story = $this->chatDto->getCurrentStory();
